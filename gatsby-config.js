@@ -1,10 +1,25 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `BlogofBanquo`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
   plugins: [
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: process.env.PRISMIC_REPOSITORY_NAME,
+        accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+        schemas: {
+          article: require("./src/schemas/article.json"),
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
