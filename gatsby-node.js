@@ -7,36 +7,33 @@
 // // You can delete this file if you're not using it
 const path = require(`path`)
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
-    const blogPost = path.resolve(`./src/pages/post.jsx`)
-    resolve(
-      graphql(`
-        {
-          allPrismicArticle {
-            edges {
-              node {
-                id
-                uid
-              }
-            }
+  const result = await graphql(`
+    {
+      allPrismicArticle {
+        edges {
+          node {
+            id
+            uid
           }
         }
-      `).then(result => {
-        const posts = result.data.allPrismicArticle.edges
-        console.log(posts)
-        posts.forEach((post, index) => {
-          createPage({
-            path: `/blog/${post.node.uid}/`,
-            component: blogPost,
-            context: {
-              slug: post.node.id,
-            },
-          })
-        })
-      })
-    )
+      }
+    }
+  `)
+
+  const posts = result.data.allPrismicArticle.edges
+  const blogPost = path.resolve(`./src/templates/post/index.jsx`)
+
+  console.log(posts)
+  posts.forEach((post, index) => {
+    createPage({
+      path: `/blog/${post.node.uid}/`,
+      component: blogPost,
+      context: {
+        slug: post.node.id,
+      },
+    })
   })
 }
