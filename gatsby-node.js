@@ -20,19 +20,62 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allPrismicCoding {
+        edges {
+          node {
+            id
+            uid
+          }
+        }
+      }
+      allPrismicPost {
+        edges {
+          node {
+            id
+            uid
+          }
+        }
+      }
     }
   `)
 
-  const posts = result.data.allPrismicArticle.edges
-  const blogPost = path.resolve(`./src/templates/post/index.jsx`)
+  const articles = result.data.allPrismicArticle.edges
+  const article = path.resolve(`./src/templates/article/index.jsx`)
+
+  const codings = result.data.allPrismicCoding.edges
+  const codePost = path.resolve(`./src/templates/coding/index.jsx`)
+
+  const posts = result.data.allPrismicPost.edges
+  const postTemplate = path.resolve(`./src/templates/post/index.jsx`)
 
   console.log(posts)
-  posts.forEach((post, index) => {
+
+  articles.forEach((post, index) => {
     createPage({
       path: `/blog/${post.node.uid}/`,
-      component: blogPost,
+      component: article,
       context: {
         slug: post.node.id,
+      },
+    })
+  })
+
+  codings.forEach((code, index) => {
+    createPage({
+      path: `/coding/${code.node.uid}`,
+      component: codePost,
+      context: {
+        slug: code.node.id,
+      },
+    })
+  })
+
+  posts.forEach((post, index) => {
+    createPage({
+      path: `/post/${post.node.uid}`,
+      component: postTemplate,
+      context: {
+        id: post.node.id,
       },
     })
   })

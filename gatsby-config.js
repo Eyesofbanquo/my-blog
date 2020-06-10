@@ -17,6 +17,8 @@ module.exports = {
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
         schemas: {
           article: require("./src/schemas/article.json"),
+          coding: require("./src/schemas/coding.json"),
+          post: require("./src/schemas/post.json"),
         },
       },
     },

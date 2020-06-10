@@ -1,55 +1,49 @@
-import React, { Component } from "react"
-import { graphql } from "gatsby"
-import Layout from "../../components/layout"
+import React from "react"
+import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
-import ArticleDetail from "../../components/articleDetail"
+import { graphql } from "gatsby"
+import "../../styles/bulma.component.sass"
 
-class Post extends Component {
+class PostTemplate extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
-    const { data } = this.props.data.post
-    const title = data.title.text
-
-    console.log(this.props)
-
+    const { post } = this.props.data.post
+    console.log(post)
     return (
-      <Layout>
-        <SEO
-          title={`My blog | ${title}`}
-          keywords={[`blog`, `gatsby`, `prismic`]}
-        />
-        {/* <div className="page">
-          <img src={data.image.url} alt="Megan Fitch" />
-          <div
-            className="c-article-content"
-            dangerouslySetInnerHTML={{ __html: data.paragraph.html }}
-          ></div>
-        </div> */}
-
-        <ArticleDetail
-          title={title}
-          image={data.image.url}
-          paragraph={data.paragraph.html}
-        />
-      </Layout>
+      <div class="container">
+        <h1>This will be where the posts live</h1>
+      </div>
     )
   }
 }
 
-export default Post
+export default PostTemplate
 
-export const postQuery = graphql`
-  query Post($slug: String) {
-    post: prismicArticle(id: { eq: $slug }) {
-      id
+export const query = graphql`
+  query PostQuery($id: String) {
+    post: prismicPost(id: { eq: $id }) {
       data {
-        title {
-          text
-        }
-        image {
-          url
-        }
-        paragraph {
-          html
+        body {
+          ... on PrismicPostBodyImage {
+            id
+            items {
+              code {
+                html
+                text
+              }
+              content {
+                text
+                html
+              }
+              header {
+                text
+                html
+              }
+            }
+          }
         }
       }
     }

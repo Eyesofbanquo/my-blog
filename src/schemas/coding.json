@@ -1,0 +1,17 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid"
+      }
+    },
+    "code_block": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "preformatted",
+        "label": "code block"
+      }
+    }
+  }
+}

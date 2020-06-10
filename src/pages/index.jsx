@@ -1,7 +1,8 @@
 import React from "react"
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
 import Article from "../components/article"
+import { graphql } from "gatsby"
 
 const IndexPage = props => {
   return (
@@ -30,6 +31,9 @@ export const IndexQuery = graphql`
             image {
               url
               alt
+            }
+            paragraph_preview {
+              text
             }
           }
           uid
