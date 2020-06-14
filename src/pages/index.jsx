@@ -14,18 +14,15 @@ const IndexPage = props => {
           title="Home"
           keywords={[`blog`, `gatsby`, `eyesofbanquo`, `Eyesofbanquo`]}
         />
-        {console.log(props.data)}
-        {props.data.articles.edges.map(article => (
-          <Article slug={article.node.uid} data={article.node.data} />
-        ))}
-        {/* <div
-          // className="message-container"
+        <div
+          className="message-container"
           css={css`
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 100%;
             justify-content: center;
+            margin: 1rem;
           `}
         >
           <article
@@ -42,7 +39,10 @@ const IndexPage = props => {
 
             <div className="message-body">I ❤️ Megan</div>
           </article>
-        </div> */}
+        </div>
+        {props.data.articles.edges.map(article => (
+          <Article slug={article.node.uid} data={article.node.data} />
+        ))}
       </div>
     </Layout>
   )
