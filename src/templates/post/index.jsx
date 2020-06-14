@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../../components/layout/layout"
 import SEO from "../../components/seo"
 import { graphql } from "gatsby"
-import "../../styles/bulma.component.sass"
 
 class PostTemplate extends React.Component {
   constructor(props) {

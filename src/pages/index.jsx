@@ -14,10 +14,11 @@ const IndexPage = props => {
           title="Home"
           keywords={[`blog`, `gatsby`, `eyesofbanquo`, `Eyesofbanquo`]}
         />
-        {/* {props.data.articles.edges.map(article => (
+        {console.log(props.data)}
+        {props.data.articles.edges.map(article => (
           <Article slug={article.node.uid} data={article.node.data} />
-        ))} */}
-        <div
+        ))}
+        {/* <div
           // className="message-container"
           css={css`
             display: flex;
@@ -41,7 +42,7 @@ const IndexPage = props => {
 
             <div className="message-body">I ❤️ Megan</div>
           </article>
-        </div>
+        </div> */}
       </div>
     </Layout>
   )
