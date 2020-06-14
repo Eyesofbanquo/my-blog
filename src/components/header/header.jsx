@@ -1,7 +1,6 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React, { useState } from "react"
-import "../../styles/bulma.component.sass"
 
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core"
@@ -10,8 +9,8 @@ import styled from "@emotion/styled"
 const HeaderLinkSkeleton = props => {
   const { className, children, to } = props
   return (
-    <Link className={className} to={to}>
-      {children}
+    <Link to={to}>
+      <div className={className}>{children}</div>
     </Link>
   )
 }
@@ -20,16 +19,9 @@ const HeaderLink = styled(HeaderLinkSkeleton)`
   color: white;
   text-decoration: none;
   font-weight: bold;
+  height: 100%;
+  width: 100%;
 `
-
-const HeaderLinkProps = {
-  color: "white",
-  textDecoration: "none",
-  fontWeight: "bold",
-  "& :hover": {
-    color: "red",
-  },
-}
 
 const Header = ({ siteTitle }) => {
   const [active, setActive] = useState("")
@@ -58,7 +50,7 @@ const Header = ({ siteTitle }) => {
         .navbar-item:hover,
         .navbar-item:focus {
           color: black;
-          background-color: yellow;
+          background-color: white;
         }
       `}
       className="navbar"

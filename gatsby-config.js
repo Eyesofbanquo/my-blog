@@ -10,6 +10,12 @@ module.exports = {
     email: `markim@donderapps.com`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-prismic`,

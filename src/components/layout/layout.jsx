@@ -11,6 +11,10 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "../header/header.jsx"
 import "./layout.css"
+import "../../styles/bulma.component.sass"
+
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -38,7 +42,11 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>
+        <footer
+          css={css`
+            margin-top: 1em;
+          `}
+        >
           © {new Date().getFullYear()},{" "}
           <a href={`mailto:${data.site.siteMetadata.email}`}>@donderapps</a>
         </footer>
