@@ -18,10 +18,13 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          email
         }
       }
     }
   `)
+
+  console.log(data)
 
   return (
     <>
@@ -36,9 +39,8 @@ const Layout = ({ children }) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          © {new Date().getFullYear()},{" "}
+          <a href={`mailto:${data.site.siteMetadata.email}`}>@donderapps</a>
         </footer>
       </div>
     </>
