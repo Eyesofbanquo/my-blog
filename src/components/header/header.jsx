@@ -3,6 +3,34 @@ import PropTypes from "prop-types"
 import React, { useState } from "react"
 import "../../styles/bulma.component.sass"
 
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core"
+import styled from "@emotion/styled"
+
+const HeaderLinkSkeleton = props => {
+  const { className, children, to } = props
+  return (
+    <Link className={className} to={to}>
+      {children}
+    </Link>
+  )
+}
+
+const HeaderLink = styled(HeaderLinkSkeleton)`
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+`
+
+const HeaderLinkProps = {
+  color: "white",
+  textDecoration: "none",
+  fontWeight: "bold",
+  "& :hover": {
+    color: "red",
+  },
+}
+
 const Header = ({ siteTitle }) => {
   const [active, setActive] = useState("")
 
@@ -19,10 +47,20 @@ const Header = ({ siteTitle }) => {
 
   return (
     <nav
-      style={{
-        background: `rebeccapurple`,
-        marginBottom: `1.45rem`,
-      }}
+      css={css`
+        background: rebeccapurple;
+        margin-bottom: 1.45rem;
+
+        .navbar-menu.is-active {
+          background-color: orange;
+        }
+
+        .navbar-item:hover,
+        .navbar-item:focus {
+          color: black;
+          background-color: yellow;
+        }
+      `}
       className="navbar"
       role="navigation"
       aria-label="main navigation"
@@ -34,6 +72,14 @@ const Header = ({ siteTitle }) => {
           aria-expanded="false"
           data-target="navbarContent"
           onClick={menuBurgerClicked}
+          css={css`
+            color: white;
+            background-color: red;
+            &:hover {
+              color: black;
+              background-color: yellow;
+            }
+          `}
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -43,24 +89,15 @@ const Header = ({ siteTitle }) => {
 
       <div className={`navbar-menu ${active}`} id="navbarContent">
         <div className="navbar-start">
-          <Link
-            className="navbar-item"
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-              fontWeight: `bold`,
-            }}
-          >
+          <HeaderLink className="navbar-item" to="/">
             {siteTitle}
-          </Link>
-          <Link
-            className="navbar-item"
-            to="/blog"
-            style={{ color: `white`, textDecoration: `none` }}
-          >
+          </HeaderLink>
+          <HeaderLink className="navbar-item" to="/blog">
             Blog
-          </Link>
+          </HeaderLink>
+          <HeaderLink className="navbar-item" to="/blog">
+            BLOGGERS
+          </HeaderLink>
         </div>
       </div>
     </nav>
