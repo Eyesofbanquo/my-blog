@@ -96,7 +96,7 @@ const Header = ({ siteTitle }) => {
             Blog
           </HeaderLink>
           <HeaderLink className="navbar-item" to="/blog">
-            BLOGGERS
+            About
           </HeaderLink>
         </div>
       </div>
